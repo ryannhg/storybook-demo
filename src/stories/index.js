@@ -1,41 +1,36 @@
 import { storiesOf } from '@storybook/vue'
 import { action } from '@storybook/addon-actions'
 import { withKnobs, text } from '@storybook/addon-knobs'
+import Centered from '@storybook/addon-centered'
 
-storiesOf('MyButton', module)
-  .addDecorator(withKnobs({ escapeHTML: false }))
-  .add('Simple example', () =>
-    '<my-button @click="">Hello</my-button>'
-  )
-  .add('With actions', () => ({
-    template: '<my-button @click="click">Hello</my-button>',
-    methods: {
-      click: action('click')
-    }
-  }))
-  .add('With knobs', () => {
+// Button
+storiesOf('Button', module)
+  .addDecorator(Centered)
+  .addDecorator(withKnobs)
+  .add('Simple', () => {
     return {
-      template: `<my-button :label="label">Hello</my-button>`
+      template: `<my-button @click="click">{{content}}</my-button>`,
+      data: () => ({
+        content: text('Content', 'Click me')
+      }),
+      methods: {
+        click: action('click')
+      }
     }
   })
-  .add('With slots + knobs', () => {
-    const props = {
-      label: text('Label', 'Hello')
-    }
+
+storiesOf('Card', module)
+  .addDecorator(Centered)
+  .addDecorator(withKnobs)
+  .add('Simple', () => {
     return {
-      render: h => {
-        return h(`my-button`, text('Label', 'Hello'))
-      },
-      props: {
-        label: {
-          type: String,
-          default: props.label
-        }
-      },
-      watch: {
-        label () {
-          this.$forceUpdate()
-        }
+      template: `<card :title="title" :subtitle="subtitle" @click="click" />`,
+      data: () => ({
+        title: text('Title', 'Ryan Haskell-Glatz'),
+        subtitle: text('Subtitle', 'Elm Salesman')
+      }),
+      methods: {
+        click: action('click')
       }
     }
   })

@@ -1,0 +1,47 @@
+.rich-text {
+  max-width: 40em;
+  h1 {
+    @include fonts__h1;
+  }
+  h2 {
+    @include fonts__h2;
+  }
+  h3 {
+    @include fonts__h3;
+  }
+  h4 {
+    @include fonts__h4;
+  }
+  h5 {
+    @include fonts__h5;
+  }
+  h6 {
+    @include fonts__h6;
+  }
+  p, ul, ol, li {
+    @include fonts__body;
+  }
+  a {
+    @include fonts__link;
+    color: $colors__gum;
+  }
+  button {
+    @include button;
+  }
+  blockquote {
+    @include blockquote;
+  }
+  h1, h2, h3, h4 {
+    &:not(:last-child) {
+      margin-top: 1.5rem;
+    }
+  }
+  p, ul, ol, h5, h6 {
+    &:not(:last-child) {
+      margin-top: 1rem;
+    }
+  }
+  li {
+    padding-left: 4px;
+  }
+}

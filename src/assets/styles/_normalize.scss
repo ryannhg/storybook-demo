@@ -1,0 +1,29 @@
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  color: $colors__coal;
+  background: $colors__shell;
+}
+h1, h2, h3, h4, h5, h6, p {
+  font-weight: inherit;
+  font-size: 1rem;
+}
+h1, h2, h3, h4, h5, h6, p, ul, ol, li {
+  margin: 0;
+}
+a, button, input, select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  background-color: $colors__transparent;
+  border: 0;
+}
+img {
+  max-width: 100%;
+}

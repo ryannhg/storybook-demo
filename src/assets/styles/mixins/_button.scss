@@ -1,7 +1,28 @@
-@mixin button {
+@mixin button() {
   @include fonts__button;
+  display: inline-block;
   padding: 10px 24px;
   border: solid 1px;
   border-radius: 4px;
   cursor: pointer;
+  transition:
+    background-color 200ms ease-in-out,
+    border-color 200ms ease-in-out;
+  @include button--colors;
+}
+
+@mixin button--colors(
+  $color: $colors__white,
+  $bgColor: $colors__gum,
+  $borderColor: $bgColor,
+  $bgOpacity: 0.75,
+  $borderOpacity: 1
+) {
+  background: $bgColor;
+  border-color: $borderColor;
+  color: $color;
+  &:hover {
+    background-color: rgba($bgColor, $bgOpacity);
+    border-color: rgba($borderColor, $borderOpacity);
+  }
 }

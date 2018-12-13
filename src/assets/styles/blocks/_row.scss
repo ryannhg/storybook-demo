@@ -1,0 +1,19 @@
+.row {
+  display: block;
+  &__item {
+    display: block;
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+  @include above (mobile) {
+    display: flex;
+    &__item {
+      flex: 0 0 auto;
+      &:not(:last-child) {
+        margin-bottom: 0;
+        margin-right: 1rem;
+      }
+    }
+  }
+}

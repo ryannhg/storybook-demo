@@ -1,0 +1,15 @@
+.grid {
+  display: block;
+  &__item {
+    display: block;
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &--two {
+    &__item {
+
+    }
+  }
+}

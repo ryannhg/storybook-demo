@@ -1,0 +1,17 @@
+.button {
+  @include button;
+  &--white {
+    @include button--colors(
+      $colors__gum,
+      $colors__white,
+      $colors__gum
+    );
+  }
+  &--dark {
+    @include button--colors(
+      $colors__white,
+      $colors__jet,
+      $colors__jet
+    );
+  }
+}

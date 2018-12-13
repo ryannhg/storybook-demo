@@ -1,0 +1,14 @@
+@mixin above ($breakpoint) {
+  $breakpoints: (
+  'mobile': ( min-width: 480px ),
+  'tablet': ( min-width:  780px ),
+  'desktop': ( min-width: 1280px )
+) !default;
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Prints a media query based on the value
+    @media #{inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
+    }
+  }
+}

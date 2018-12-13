@@ -1,10 +1,27 @@
-import { storiesOf } from '@storybook/vue'
+import { storiesOf, addDecorator } from '@storybook/vue'
+import { withBackgrounds } from '@storybook/addon-backgrounds'
 import { action } from '@storybook/addon-actions'
 import { withKnobs, text, array } from '@storybook/addon-knobs'
+import { withMarkdownNotes } from '@storybook/addon-notes'
+import { checkA11y } from '@storybook/addon-a11y'
 import Centered from '@storybook/addon-centered'
 import Vue from 'vue'
 
 import RichText from '../components/RichText'
+
+const backgrounds = [
+  { name: 'white', value: '#ffffff' },
+  { name: 'shell', value: '#f8edef', default: true },
+  { name: 'gum', value: '#ef626c' },
+  { name: 'coal', value: '#22181c' },
+  { name: 'jet', value: '#312f2f' },
+  { name: 'sea', value: '#84dccf' }
+]
+
+// Global Decorators
+addDecorator(withKnobs)
+addDecorator(checkA11y)
+addDecorator(withBackgrounds(backgrounds))
 
 // Components
 Vue.component('rich-text', RichText)
@@ -12,7 +29,6 @@ Vue.component('rich-text', RichText)
 // Style Guide
 storiesOf('Typography', module)
   .addDecorator(Centered)
-  .addDecorator(withKnobs)
   .add('Overview', () => {
     return {
       data: () => ({
@@ -60,3 +76,54 @@ storiesOf('Typography', module)
       `
     }
   })
+
+storiesOf('Components')
+  .addDecorator(Centered)
+  .addDecorator(withMarkdownNotes())
+  .add(
+    'Button',
+    () => ({
+      template: `<button class="button" @click="click" v-text="label"></button>`,
+      data: _ => ({
+        label: text('Label', 'View more')
+      }),
+      methods: {
+        click: action('click')
+      }
+    }), { notes: { markdown: `
+# Button
+An interactive element.
+` } })
+  .add(
+    'Button Row',
+    () => ({
+      template: `
+<div class="row">
+  <div class="row__item">
+    <button class="button" @click="click" v-text="labelOne"></button>
+  </div>
+  <div class="row__item">
+    <button class="button button--white" @click="click" v-text="labelTwo"></button>
+  </div>
+  <div class="row__item">
+    <button class="button button--dark" @click="click" v-text="labelThree"></button>
+  </div>
+</div>`,
+      data: _ => ({
+        labelOne: text('Label One', 'View more'),
+        labelTwo: text('Label Two', 'View more'),
+        labelThree: text('Label Three', 'View more')
+      }),
+      methods: {
+        click: action('click')
+      }
+    }), { notes: { markdown: `
+  # Button Row
+  A row of buttons
+  ` } })
+//   .add('Hero')
+
+// storiesOf('Pages')
+//   .add('Homepage')
+//   .add('Landing Page')
+//   .add('Detail Page')

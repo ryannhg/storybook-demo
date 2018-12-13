@@ -1,18 +1,27 @@
 {
   "name": "@onenorth/swiggity-fed",
   "version": "1.0.0",
-  "description": "",
+  "description": "An experiment!",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryannhg/storybook-demo"
+  },
   "main": "index.js",
   "scripts": {
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "dev": "npm run storybook"
   },
   "author": "Ryan Haskell-Glatz",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.2.0",
+    "@storybook/addon-a11y": "4.0.7",
     "@storybook/addon-actions": "4.0.7",
+    "@storybook/addon-backgrounds": "4.0.7",
     "@storybook/addon-centered": "4.0.7",
     "@storybook/addon-knobs": "4.0.7",
+    "@storybook/addon-notes": "4.0.7",
+    "@storybook/addon-viewport": "4.0.7",
     "@storybook/vue": "4.0.7",
     "babel-loader": "^8.0.4",
     "babel-preset-vue": "^2.0.2",

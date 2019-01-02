@@ -19,7 +19,7 @@ export default {
   props: {
     avatar: Object,
     header: Object,
-    intro: Object,
+    intro: String,
     cta: Object
   },
   computed: {

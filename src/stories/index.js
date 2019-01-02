@@ -1,13 +1,14 @@
 import { storiesOf, addDecorator } from '@storybook/vue'
 import { withBackgrounds } from '@storybook/addon-backgrounds'
 import { action } from '@storybook/addon-actions'
-import { withKnobs, text, array } from '@storybook/addon-knobs'
+import { withKnobs, text, array, select, withKnobsOptions } from '@storybook/addon-knobs'
 import { withMarkdownNotes } from '@storybook/addon-notes'
 import { checkA11y } from '@storybook/addon-a11y'
 import Centered from '@storybook/addon-centered'
 import Vue from 'vue'
 
 import RichText from '../components/RichText'
+import Card from '../components/Card'
 
 const backgrounds = [
   { name: 'white', value: '#ffffff' },
@@ -25,6 +26,7 @@ addDecorator(withBackgrounds(backgrounds))
 
 // Components
 Vue.component('rich-text', RichText)
+Vue.component('card', Card)
 
 // Style Guide
 storiesOf('Typography', module)
@@ -45,11 +47,8 @@ storiesOf('Typography', module)
         ]),
         blockquote: text('Blockquote', `A volumed planet's fall comes with it the thought that the spryest newsprint is a rugby. A softball is an iran from the right perspective. Those gears are nothing more than freons. Though we assume the latter, authors often misinterpret the alloy as a volumed interactive, when in actuality it feels more like a preserved airbus.`)
       }),
-      methods: {
-        onClick: action('onClick')
-      },
       template: `
-        <rich-text @click="onClick" style="padding: 4rem 1.5rem;">
+        <rich-text style="padding: 4rem 1.5rem;">
           <h1 v-html="h1"></h1>
           <h2 v-html="h2"></h2>
           <h3 v-html="h3"></h3>
@@ -90,10 +89,13 @@ storiesOf('Components')
       methods: {
         click: action('click')
       }
-    }), { notes: { markdown: `
+    }), {
+      notes: {
+        markdown: `
 # Button
 An interactive element.
-` } })
+` }
+    })
   .add(
     'Button Row',
     () => ({
@@ -117,11 +119,96 @@ An interactive element.
       methods: {
         click: action('click')
       }
-    }), { notes: { markdown: `
+    }), {
+      notes: {
+        markdown: `
   # Button Row
   A row of buttons
-  ` } })
-//   .add('Hero')
+  ` }
+    })
+  .addDecorator(withKnobsOptions({ escapeHTML: false }))
+  .add(
+    'Card',
+    _ => ({
+      template: `<card v-bind="card"></card>`,
+      data: _ => ({
+        card: {
+          avatar: {
+            src: text('Avatar URL', 'https://robohash.org/ryan'),
+            alt: 'Ryan as a robot.'
+          },
+          header: {
+            name: text('Title', 'Ryan Haskell-Glatz'),
+            title: text('Subtitle', 'Desk-to-Desk Elm Salesman')
+          },
+          intro: text('Intro', `<p>Ryan spends his time making <em>unreadable, terse</em> JS code. His goal is to minimize the amount of characters he has to type, because his fingers get tired.</p>`),
+          cta: {
+            label: text('Button Label', 'Learn more'),
+            url: '#'
+          }
+        }
+      })
+    }),
+    {
+      notes: {
+        markdown: `
+# Cards
+They exist. Cant argue with that.
+        `
+      }
+    }
+  )
+
+storiesOf('Layouts')
+  .add(
+    'Grid',
+    () => ({
+      template: `
+      <div class="container" style="padding: 4rem 1.5rem;">
+        <div class="grid">
+          <div class="grid__item" v-for="(item, i) in list" :key="i">
+            <div v-if="componentMapping[component]" :is="componentMapping[component]" v-bind="dataMapping[component]"></div>
+            <div v-else style="background-color: #ccc; min-height: 200px; width: 100%"></div>
+          </div>
+        </div>
+      </div>
+      `,
+      data: _ => ({
+        tileCount: 12,
+        component: select('Component', {
+          Empty: 'empty',
+          Card: 'card'
+        }, 'none'),
+        componentMapping: {
+          card: Card
+        },
+        dataMapping: {
+          card: {
+            background:
+              'https://images.unsplash.com/photo-1546419031-2f09ee2293d8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+            avatar: {
+              src: 'https://robohash.org/ryan',
+              alt: 'Ryan as a robot.'
+            },
+            header: {
+              name: 'Ryan Haskell-Glatz',
+              title: 'Desk-to-Desk Elm Salesman'
+            },
+            intro: `<p>Ryan spends his time making <em>unreadable, terse</em> JS code. His goal is to minimize the amount of characters he has to type, because his fingers get tired.</p>`,
+            cta: {
+              label: 'Learn more',
+              url: '#'
+            }
+          }
+        }
+      }),
+      computed: {
+        list () {
+          return [...Array(this.tileCount)]
+        }
+      }
+    })
+  )
 
 // storiesOf('Pages')
 //   .add('Homepage')

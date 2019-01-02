@@ -22,7 +22,11 @@ a, button, input, select {
   color: inherit;
   background-color: $colors__transparent;
   border: 0;
+  text-decoration: none;
 }
 img {
   max-width: 100%;
+}
+body * {
+  box-sizing: border-box;
 }

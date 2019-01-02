@@ -1,15 +1,12 @@
 .grid {
-  display: block;
-  &__item {
-    display: block;
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
+  $spacing: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: $spacing;
+  @include above(mobile) {
+    grid-template-columns: repeat(2, 1fr);
   }
-
-  &--two {
-    &__item {
-
-    }
+  @include above(tablet) {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

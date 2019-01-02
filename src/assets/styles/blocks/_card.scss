@@ -1,0 +1,40 @@
+.card {
+  background-color: $colors__white;
+  color: $colors__jet;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  padding: 1rem;
+  &__header {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  &__avatar {
+    display: block;
+    border: solid 1px #ccc;
+    background-color: $colors__white;
+    border-radius: 50%;
+    flex: 1 1 auto;
+    width: 25%;
+    margin-right: 1rem;
+  }
+  &__header-content {
+    flex: 4 1 auto;
+    overflow: hidden;
+  }
+  &__title {
+    @include fonts__h4;
+  }
+  &__subtitle {
+    @include fonts__caption;
+    margin-top: 0.25rem;
+    max-width: 100%;
+  }
+  &__content {
+    padding-top: 1rem;
+  }
+  &__buttons {
+    padding-top: 1rem;
+  }
+}

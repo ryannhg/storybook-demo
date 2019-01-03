@@ -9,6 +9,7 @@
   "main": "index.js",
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
+    "build": "build-storybook -c .storybook -o .out",
     "dev": "npm run storybook"
   },
   "author": "Ryan Haskell-Glatz",

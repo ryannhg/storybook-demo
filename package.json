@@ -10,7 +10,10 @@
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build": "build-storybook -c .storybook -o .out",
-    "dev": "npm run storybook"
+    "dev": "npm run storybook",
+    "test": "jest -c integration/jest.config.js || true",
+    "snapshot": "npm run jest -- -u",
+    "run-and-test": "start-server-and-test storybook http-get://localhost:9001 jest"
   },
   "author": "Ryan Haskell-Glatz",
   "license": "ISC",
@@ -27,9 +30,14 @@
     "autoprefixer": "^9.4.3",
     "babel-loader": "^8.0.4",
     "babel-preset-vue": "^2.0.2",
+    "jest": "^23.6.0",
+    "jest-image-snapshot": "^2.7.0",
+    "jest-puppeteer": "^3.8.0",
     "node-sass": "^4.10.0",
     "postcss-loader": "^3.0.0",
+    "puppeteer": "^1.11.0",
     "sass-loader": "^7.1.0",
+    "start-server-and-test": "^1.7.11",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.17"
   },

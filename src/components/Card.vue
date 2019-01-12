@@ -21,13 +21,6 @@ export default {
     header: Object,
     intro: String,
     cta: Object
-  },
-  computed: {
-    topStyles() {
-      return {
-        'background-image': this.background && `url('${this.background}')`
-      };
-    }
   }
 };
 </script>
